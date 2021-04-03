@@ -1,0 +1,283 @@
+<header class="container-fluid login-clean">
+    <div class="row">
+        <ul class="nav nav-pills  " id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a data-toggle="tab" class="nav-link" href="#pills-list">Danh sách</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a data-toggle="tab" class="nav-link" href="#pills-find">Tìm kiếm</a>
+
+            </li>
+            <li class="nav-item" role="presentation">
+                <a data-toggle="tab" class="nav-link" href="#pills-add-list">Thêm</a>
+            </li>
+        </ul>
+        <div style=" margin-top: 10px;" class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-list" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class='container-fluid'>
+
+                    <div class="row">
+                        <div class="col">
+                            <table style=" margin-right: 800x; background-color: #ce7575; border-radius: 40px;"
+                                class="table  ">
+                                <thead class="container-fluid">
+                                    <tr>
+                                        <th scope="col">STT</th>
+                                        <th scope="col">Họ Tên</th>
+                                        <th scope="col">Ngày Sinh</th>
+                                        <th scope="col">SDT(Email)</th>
+                                        <th scope="col">Giới Tính</th>
+                                        <th scope="col">Sở Thích</th>
+                                        <th scope="col">Giới Thiệu Ngắn</th>
+                                        <th scope="col">Avatar</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="listUser container-fluid">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pills-find" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="container-fluid">
+                    <div class="row">
+                        <form class="d-flex">
+                            <input id="inputSearch" class="form-control me-2" type="search" placeholder="Họ tên"
+                                aria-label="Search">
+                            <button id="btnSearch" class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                    <div class='row'>
+
+                    </div>
+                    <div class="row rowSearch" style='display: none;'>
+                        <div class="col">
+                            <table class="table table-success">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Họ tên</th>
+                                        <th scope="col">Ngày Sinh</th>
+                                        <th scope="col">SDT(email)</th>
+                                        <th scope="col">Giới tính</th>
+                                        <th scope="col">Sở thích</th>
+                                        <th scope="col">Giới thiệu ngắn</th>
+                                        <th scope="col">Avatar</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="userSearch ">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-add-list" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Họ tên</label>
+                        <input type="text" id="ipName" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Ngày sinh</label>
+                        <input type="text" id="ipNgaySinh" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" id="ipEmail" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Nam
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                                checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Nữ
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Sở thích</label>
+                        <textarea class="form-control" id="textareaSoThich" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Giới thiệu</label>
+                        <textarea class="form-control" id="textareaGioiThieu" rows="3"></textarea>
+                    </div>
+                    <button id="add-user" type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+</header>
+<script>
+    let images = 'https://scr.vn/wp-content/uploads/2020/07/avt-cute.jpg';
+
+
+    var listUser = $('.listUser');
+    var userSearch = $('.userSearch');
+    var inputSearch = $('#inputSearch');
+    var buttonSearch = $('#btnSearch');
+    // tìm  kiếm
+    buttonSearch.click(function (ev) {
+        ev.preventDefault();
+        var users = arr.filter(user => user.name === inputSearch.val().trim());
+        if (users.length !== 0) {
+            var p = '';
+            $('.rowSearch').css({ 'display': 'block' })
+            users.forEach((element, index) => {
+                p += `<tr>
+            <td>${index + 1}</td>
+                    <td scope="row">${element.name}</td>
+                    <td>${element.ngaySinh}</td>
+                    <td >${element.email}</td>
+                    <td >${element.gioiTinh}</td>
+                    <td >${element.soThich}</td>
+                    <td >${element.gioiThieu}</td>
+                    <td><img class="img-avatar" src="${element.images}" /></td>
+                </tr> `
+            })
+            userSearch.html(p)
+        } else {
+            $('.rowSearch').css({ 'display': 'none' })
+            alert('Không có user.')
+        }
+    })
+
+
+    var object = {
+        name: 'Duyen',
+        ngaySinh: '16/1/2001',
+        email: 'duyen@gmail.com',
+        gioiTinh: 'nu',
+        soThich: 'abcd',
+        gioiThieu: 'Không có',
+        images
+    }
+    var object1 = {
+        name: 'Ngoc',
+        ngaySinh: '1/12/2004',
+        email: 'ngoc@gmail.com',
+        gioiTinh: 'nu',
+        soThich: 'abc',
+        gioiThieu: 'Không có',
+        images
+    }
+    var object2 = {
+        name: 'Tu',
+        ngaySinh: '13/5/2002',
+        email: 'tu@gmail.com',
+        gioiTinh: 'nam',
+        soThich: '123',
+        gioiThieu: 'Không có',
+        images
+    }
+    var object3 = {
+        name: 'Huynh',
+        ngaySinh: '13/11/2002',
+        email: 'huynh@gmail.com',
+        gioiTinh: 'nam',
+        soThich: 'ưyeuweu',
+        gioiThieu: 'Không có',
+        images
+    }
+
+
+    var arr = [object, object1, object2, object3];
+
+    const updateArr = function () {
+        arr.forEach(function (element, index) {
+            listUser.append(`<tr class="tr">
+                    <th  scope="row">${index}</th>
+                    <td ><input class="input" name="name" type="text" value="${element.name}" disabled></td>
+                    <td ><input class="input" name="ngaySinh" type="text" value="${element.ngaySinh}" disabled></td>
+                    <td ><input class="input" name="email" type="text" value="${element.email}" disabled></td>
+                    <td  ><input class="input" name="gioitinh" type="text" value="${element.gioiTinh}" disabled></td>
+                    <td  ><input class="input" name="sothich" type="text" value="${element.soThich}" disabled></td>
+                    <td  ><input class="input" name="gioithieu" type="text" value="${element.gioiThieu}" disabled></td>
+                    <td  ><img class="img-avatar" src="${element.images}" /></td>
+                    <td  ><button class="btn-remove">Delete</button><button class="btn-edit">Edit</button></td>
+                </tr> `)
+        })
+    }
+    // danh sách
+    $(document).ready(function () {
+        updateArr()
+        // xóa 
+        const btnXoa = document.querySelectorAll('.btn-remove')
+        const btnSua = document.querySelectorAll('.btn-edit')
+        const tr = document.querySelectorAll('.tr');
+        btnXoa.forEach((element, key) => {
+            element.addEventListener('click', function (ev) {
+                tr[key].style.display = "none";
+                arr.splice(key, 1);
+                console.log(arr)
+            })
+        });
+
+        for (let index = 0; index < btnSua.length; index++) {
+            btnSua[index].addEventListener("click", function () {
+                if (btnSua[index].innerHTML === 'Edit') {
+                    btnSua[index].innerHTML = "Save"
+                    $('input[name="name"]')[index].disabled = false;
+                    $('input[name="ngaySinh"]')[index].disabled = false;
+                    $('input[name="email"]')[index].disabled = false;
+                    $('input[name="gioitinh"]')[index].disabled = false;
+                    $('input[name="sothich"]')[index].disabled = false;
+                    $('input[name="gioithieu"]')[index].disabled = false;
+                } else {
+                    btnSua[index].innerHTML = 'Edit'
+                    $('input[name="name"]')[index].disabled = true;
+                    $('input[name="ngaySinh"]')[index].disabled = true;
+                    $('input[name="email"]')[index].disabled = true;
+                    $('input[name="gioitinh"]')[index].disabled = true;
+                    $('input[name="sothich"]')[index].disabled = true;
+                    $('input[name="gioithieu"]')[index].disabled = true;
+                }
+            })
+
+        }
+
+    })
+
+    // khi nhấn vào thêm
+    const buttonThem = $('#add-user');
+    buttonThem.click(function (ev) {
+        ev.preventDefault();
+        const name = $('#ipName').val();
+        const ngaySinh = $('#ipNgaySinh').val();
+        const email = $('#ipEmail').val();
+        const soThich = $('#textareaSoThich').val();
+        const gioiThieu = $('#textareaGioiThieu').val();
+        var a = document.getElementsByName('flexRadioDefault');
+        let gioiTinh = '';
+        if (a[0].checked) {
+            gioiTinh = 'nam';
+        } else if (a[1].checked) {
+            gioiTinh = 'nữ';
+        }
+        var object = { name, ngaySinh, email, gioiTinh, soThich, gioiThieu, images };
+        arr.push(object);
+        listUser.append(`<tr>
+                    <th scope="row">0</th>
+                    <td ><input class="input" name="name" type="text" value="${object.name}" disabled></td>
+                    <td ><input class="input" name="ngaySinh" type="text" value="${object.ngaySinh}" disabled></td>
+                    <td ><input class="input" name="email" type="text" value="${object.email}" disabled></td>
+                    <td  ><input class="input" name="gioitinh" type="text" value="${object.gioiTinh}" disabled></td>
+                    <td  ><input class="input" name="sothich" type="text" value="${object.soThich}" disabled></td>
+                    <td  ><input class="input" name="gioithieu" type="text" value="${object.gioiThieu}" disabled></td>
+                    <td  ><img class="img-avatar" src="${object.images}" /></td>
+                    <td  ><button class="btn-remove">Delete</button><button class="btn-edit">Edit</button></td>
+               </tr> `)
+        alert('Thêm thành công')
+    })
+
+</script>
